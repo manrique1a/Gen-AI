@@ -1,3 +1,9 @@
+# --- Patch sqlite3 for Chroma compatibility ---
+import sys
+import pysqlite3
+sys.modules["sqlite3"] = pysqlite3
+
+# --- Imports ---
 import streamlit as st
 from langchain_community.vectorstores import Chroma
 from langchain_community.embeddings import HuggingFaceEmbeddings
@@ -45,4 +51,5 @@ if query:
         for i, doc in enumerate(result["source_documents"]):
             st.markdown(f"**Source {i+1}**")
             st.code(doc.page_content[:500])
+
 

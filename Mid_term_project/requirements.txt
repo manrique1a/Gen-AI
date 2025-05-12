@@ -1,9 +1,19 @@
+# Core app
 streamlit
 langchain
-langchain-community
-chromadb
+langchain-community==0.3.23
 transformers
 sentence-transformers
 protobuf==3.20.3
+
+# Vectorstore
+chromadb
+pysqlite3-binary  # Fixes sqlite3 version compatibility for Chroma
+faiss-cpu         # Optional: only needed if switching between FAISS and Chroma
+
+# Optional extras
+torch             # Required by transformers and HuggingFacePipeline
+
+
 
 
