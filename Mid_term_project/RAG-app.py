@@ -1,9 +1,3 @@
-# --- Patch sqlite3 for Chroma compatibility ---
-import sys
-import pysqlite3
-sys.modules["sqlite3"] = pysqlite3
-
-# --- Imports ---
 import streamlit as st
 from langchain_community.vectorstores import Chroma
 from langchain_community.embeddings import HuggingFaceEmbeddings
@@ -17,7 +11,10 @@ st.title("💬 Applied Data Science RAG Assistant")
 
 # --- Load Vectorstore ---
 persist_dir = "./chroma_store"  # adjust if different
-embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+embedding_model = HuggingFaceEmbeddings(
+    model_name="sentence-transformers/all-MiniLM-L6-v2",
+    model_kwargs={"device": "cpu"}  # Prevent meta tensor error
+)
 
 try:
     vectorstore = Chroma(persist_directory=persist_dir, embedding_function=embedding_model)
@@ -51,5 +48,6 @@ if query:
         for i, doc in enumerate(result["source_documents"]):
             st.markdown(f"**Source {i+1}**")
             st.code(doc.page_content[:500])
+
 
 
