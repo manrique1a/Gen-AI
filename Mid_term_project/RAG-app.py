@@ -16,8 +16,7 @@ st.title("💬 The University of Chicago Master's in Applied Data Science Chatbo
 
 # --- Load fine-tuned embedding model ---
 embedding_model = HuggingFaceEmbeddings(
-    model_name="fine_tuned_qa_embedding_model",
-    device="cpu"
+    model_name="fine_tuned_qa_embedding_model"
 )
 
 # --- Load persisted vectorstore ---
