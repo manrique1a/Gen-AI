@@ -2,7 +2,8 @@ import streamlit as st
 from langchain_community.vectorstores import Chroma
 from langchain.chains import RetrievalQA
 from langchain.chat_models import ChatOpenAI
-from langchain_huggingface import HuggingFaceEmbeddings
+from sentence_transformers import SentenceTransformer
+from langchain_community.embeddings import HuggingFaceEmbeddings
 from dotenv import load_dotenv
 import os
 
@@ -15,9 +16,8 @@ st.set_page_config(page_title="UChicago ADS Chatbot", layout="wide")
 st.title("💬 The University of Chicago Master's in Applied Data Science Chatbot")
 
 # --- Load fine-tuned embedding model ---
-embedding_model = HuggingFaceEmbeddings(
-    model_name="./fine_tuned_qa_embedding_model"
-)
+local_model = SentenceTransformer("fine_tuned_qa_embedding_model")
+embedding_model = HuggingFaceEmbeddings(model=local_model)
 
 # --- Load persisted vectorstore ---
 persist_dir = "chroma_store"
