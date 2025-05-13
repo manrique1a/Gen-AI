@@ -2,6 +2,7 @@
 streamlit
 langchain==0.1.17
 langchain-community==0.3.23
+langchain-huggingface 
 transformers==4.40.1
 sentence-transformers==2.6.1
 protobuf==3.20.3
