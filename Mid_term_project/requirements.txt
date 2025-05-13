@@ -9,6 +9,8 @@ protobuf==3.20.3
 # Vectorstore
 chromadb
 faiss-cpu
+pysqlite3-binary
+
 
 # Optional extras
 torch
