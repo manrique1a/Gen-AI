@@ -4,7 +4,7 @@ langchain
 langchain-community
 transformers
 sentence-transformers
-protobuf
+protobuf==3.20.3
 
 # Vectorstore
 chromadb
