@@ -16,10 +16,12 @@ st.set_page_config(page_title="UChicago ADS Chatbot", layout="wide")
 st.title("💬 The University of Chicago Master's in Applied Data Science Chatbot")
 
 # --- Load fine-tuned embedding model ---
+os.environ["HF_HUB_OFFLINE"] = "1"
+
+# Load local model correctly
 local_model = SentenceTransformer(
-    "fine_tuned_qa_embedding_model",
-    local_files_only=True,
-    use_auth_token=False  # ensures no HuggingFace login needed
+    "fine_tuned_qa_embedding_model", 
+    local_files_only=True
 )
 
 embedding_model = HuggingFaceEmbeddings(model=local_model)
