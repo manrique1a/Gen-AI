@@ -1,20 +1,21 @@
 # Core app
 streamlit
-langchain==0.1.17
-langchain-community==0.0.36          
-langchain-huggingface==0.2.0
-transformers==4.40.1
-sentence-transformers==2.6.1
-protobuf==3.20.3
+langchain
+langchain-community
+langchain-huggingface
+transformers
+sentence-transformers
+protobuf
 
 # Vectorstore
-chromadb>=0.4.15
-faiss-cpu
+chromadb
+faiss-cpu             # Optional: only needed if switching between FAISS and Chroma
 
 # Optional extras
-torch==2.2.2
+torch
 openai
 python-dotenv
+
 
 
 
