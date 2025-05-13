@@ -11,8 +11,9 @@ chromadb>=0.4.15
 faiss-cpu             # Optional: only needed if switching between FAISS and Chroma
 
 # Optional extras
-torch==2.2.2          # Required by transformers + sentence-transformers
-
+torch==2.2.2
+openai
+python-dotenv         # Optional for local dev
 
 
 

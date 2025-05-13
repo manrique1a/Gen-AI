@@ -1,20 +1,22 @@
 import streamlit as st
 from langchain_community.vectorstores import Chroma
 from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain_community.llms import HuggingFacePipeline
+from langchain.chat_models import ChatOpenAI
 from langchain.chains import RetrievalQA
-from transformers import pipeline
+from dotenv import load_dotenv
+import os
+
+# --- Load secrets from Streamlit (or .env if running locally) ---
+load_dotenv()  # Optional for local dev
+openai_api_key = os.getenv("OPENAI_API_KEY")
 
 # --- Streamlit Setup ---
 st.set_page_config(page_title="Applied Data Science Q&A", layout="wide")
-st.title("💬 Applied Data Science RAG Assistant")
+st.title("💬 The University of Chicago's Master's in Applied Data Science Chatbot")
 
 # --- Load Vectorstore ---
-persist_dir = "./chroma_store"  # adjust if different
-embedding_model = HuggingFaceEmbeddings(
-    model_name="sentence-transformers/all-MiniLM-L6-v2",
-    model_kwargs={"device": "cpu"}  # Prevent meta tensor error
-)
+persist_dir = "chroma_store"
+embedding_model = HuggingFaceEmbeddings(model_name="fine_tuned_qa_embedding_model")
 
 try:
     vectorstore = Chroma(persist_directory=persist_dir, embedding_function=embedding_model)
@@ -24,9 +26,8 @@ except Exception as e:
 
 retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
 
-# --- Placeholder Model ---
-placeholder_pipeline = pipeline("text-generation", model="gpt2", max_new_tokens=100)
-llm = HuggingFacePipeline(pipeline=placeholder_pipeline)
+# --- LLM Setup (GPT-3.5 Turbo) ---
+llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0, openai_api_key=openai_api_key)
 
 # --- RAG Chain ---
 qa_chain = RetrievalQA.from_chain_type(
@@ -36,7 +37,7 @@ qa_chain = RetrievalQA.from_chain_type(
 )
 
 # --- UI ---
-query = st.text_input("Ask a question about the Applied Data Science program:")
+query = st.text_input("Ask a question about the Master's in Applied Data Science program at the University of Chicago:")
 
 if query:
     with st.spinner("Thinking..."):
@@ -48,6 +49,7 @@ if query:
         for i, doc in enumerate(result["source_documents"]):
             st.markdown(f"**Source {i+1}**")
             st.code(doc.page_content[:500])
+
 
 
 
