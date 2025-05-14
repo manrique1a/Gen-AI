@@ -41,21 +41,11 @@ model_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "app_model"
 embedding_model = HuggingFaceEmbeddings(model_name=model_path)
 
 # --- Load persisted vectorstore ---
-persist_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "chroma_v3"))
-
+persist_dir = "chroma_v3"
 try:
-    if not os.path.exists(os.path.join(persist_dir, "chroma.sqlite3")):
-        # If no vectorstore exists, create it from the docs
-        vectorstore = Chroma.from_documents(
-            documents=docs,
-            embedding=embedding_model,
-            persist_directory=persist_dir
-        )
-    else:
-        # Load existing vectorstore
-        vectorstore = Chroma(persist_directory=persist_dir, embedding_function=embedding_model)
+    vectorstore = Chroma(persist_directory=persist_dir, embedding_function=embedding_model)
 except Exception as e:
-    st.error(f"Failed to load or build vectorstore: {e}")
+    st.error(f"Failed to load vectorstore: {e}")
     st.stop()
 
 retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
