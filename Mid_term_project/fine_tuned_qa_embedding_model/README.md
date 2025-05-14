@@ -4,77 +4,78 @@ tags:
 - sentence-similarity
 - feature-extraction
 - generated_from_trainer
-- dataset_size:22
+- dataset_size:28
 - loss:MultipleNegativesRankingLoss
 base_model: sentence-transformers/all-MiniLM-L6-v2
 widget:
 - source_sentence: Where is the campus located?
   sentences:
+  - Students gain hands-on experience through capstone projects, industry collaborations,
+    and events such as company site visits, helping them build practical skills that
+    are directly applicable to the workforce.
   - Our campus is strategically situated at the NBC Tower and Gleacher Center in downtown
     Chicago’s Streeterville neighborhood
-  - In-Person application decisions are released approximately 1 to 2 months after
-    each respected deadline. Online application decisions are released on a rolling
-    basis
-  - We strongly recommend that at least one letter is written by someone such as a
-    direct manager/supervisor or internship supervisor who can attest to skills you
-    demonstrated or gained though a professional workplace experience (e.g., leadership,
-    teamwork, collaboration, initiative, management, other).
-- source_sentence: How do I apply to the MBA/MS program?
+  - The curriculum emphasizes a combination of computational and analytical skills,
+    domain knowledge, communication, and ethics, preparing students for broad application
+    of data science in various sectors.
+- source_sentence: What is the structure of the capstone experience in the MS in Applied
+    Data Science program?
   sentences:
   - The MS in Applied Data Science program offers partial tuition scholarships to
     top applicants. These scholarships do not require a separate application but it
     is recommended that candidates submit their applications ahead of the early deadline
     to maximize their chances of securing a scholarship.
-  - The MS in Applied Data Science program requires two letters of recommendation
-  - Applicants interested in the Joint MBA/MS degree will apply through Booth’s centralized,
-    joint-application process. Applicants should complete the Chicago Booth Full-Time
-    MBA application and select the MBA/MS in Applied Data Science as their program
-    of interest
-- source_sentence: What programs options are available in the MS Applied Data Science
-    program?
+  - The capstone is a project-based course where students work in teams to solve real-world
+    problems for clients from industry, academia, and social impact organizations,
+    applying data science in a practical setting.
+  - The MS in Applied Data Science program is STEM/OPT eligible
+- source_sentence: What is the purpose of the capstone projects in the MS in Applied
+    Data Science program?
   sentences:
-  - In-person program, Online progran and Joint MBA/MS program
-  - 'November 7, 2024 - Priority Application Deadline
-
-    December 4, 2024 - Scholarship Priority Deadline
-
-    January 21, 2025 - International Application Deadline (requiring visa sponsorship
-    from UChicago)
-
-    March 4, 2025 - Second Priority Application Deadline
-
-    May 6, 2025 - Third Priority Application Deadline
-
-    June 23, 2025 - Final Application Deadline'
-  - 'Tuition for the MS in Applied Data Science program: $5,967 per course/$71,604
-    total tuition'
-- source_sentence: Where is the Data Science Institute located?
-  sentences:
-  - Located within Hyde Park campus
-  - The Data Science Institute Scholarship, MS in Applied Data Science Alumni Scholarship
-  - Yes, meet your admissions counselor by scheduling an appointment https://apply-psd.uchicago.edu/portal/applied-data-science
-- source_sentence: Does the Master’s in Applied Data Science Online program provide
-    visa sponsorship?
-  sentences:
-  - Full-time students take 3 classes per quarter (300 units). Part-time students
-    take 2 classes per quarter (200 units)
   - To earn the MS-ADS degree students must successfully complete 12 courses (6 core,
     4 elective, 2 Capstone) and our tailored Career Seminar
-  - Only our In-Person, Full-Time program is Visa eligible
+  - Capstone projects allow students to address real-world challenges across industries,
+    showcasing practical and impactful data science solutions. Outstanding projects
+    are recognized with awards such as 'Best in Show'.
+  - Introduction to Statistical Concepts (Foundational, optional), R for Data Science
+    (Foundational, optional), Python for Data Science (Foundational, optional), Advanced
+    Linear Algebra for Machine Learning (Foundational, optional)
+- source_sentence: How long will it take for me to receive a decision on my application?
+  sentences:
+  - Located within Hyde Park campus
+  - Most courses are from 6-9pm Monday through Thursday with some offered on Fridays
+    and Saturdays. This allows you to work in an internship and/or job during the
+    program
+  - In-Person application decisions are released approximately 1 to 2 months after
+    each respected deadline. Online application decisions are released on a rolling
+    basis
+- source_sentence: Where can I mail my official transcripts?
+  sentences:
+  - Ethics is integrated into the curriculum alongside technical skills to ensure
+    graduates are equipped to consider the social impact of data science solutions
+    and apply responsible practices in real-world contexts.
+  - The MS in Applied Data Science program requires two letters of recommendation
+  - 'The University of Chicago
+
+    Attention: MS in Applied Data Science Admissions
+
+    455 N Cityfront Plaza Dr., Suite 950
+
+    Chicago, Illinois 60611'
 pipeline_tag: sentence-similarity
 library_name: sentence-transformers
 metrics:
 - pearson_cosine
 - spearman_cosine
 co2_eq_emissions:
-  emissions: 0.08184138571956523
-  energy_consumed: 0.00022239044414250008
+  emissions: 0.12810612663829163
+  energy_consumed: 0.00034810723388881034
   source: codecarbon
   training_type: fine-tuning
   on_cloud: false
   cpu_model: Intel(R) Core(TM) i5-5350U CPU @ 1.80GHz
   ram_total_size: 8.0
-  hours_used: 0.024
+  hours_used: 0.035
 model-index:
 - name: SentenceTransformer based on sentence-transformers/all-MiniLM-L6-v2
   results:
@@ -143,9 +144,9 @@ from sentence_transformers import SentenceTransformer
 model = SentenceTransformer("sentence_transformers_model_id")
 # Run inference
 sentences = [
-    'Does the Master’s in Applied Data Science Online program provide visa sponsorship?',
-    'Only our In-Person, Full-Time program is Visa eligible',
-    'Full-time students take 3 classes per quarter (300 units). Part-time students take 2 classes per quarter (200 units)',
+    'Where can I mail my official transcripts?',
+    'The University of Chicago\nAttention: MS in Applied Data Science Admissions\n455 N Cityfront Plaza Dr., Suite 950\nChicago, Illinois 60611',
+    'The MS in Applied Data Science program requires two letters of recommendation',
 ]
 embeddings = model.encode(sentences)
 print(embeddings.shape)
@@ -212,19 +213,19 @@ You can finetune this model on your own dataset.
 
 #### Unnamed Dataset
 
-* Size: 22 training samples
+* Size: 28 training samples
 * Columns: <code>sentence_0</code>, <code>sentence_1</code>, and <code>label</code>
-* Approximate statistics based on the first 22 samples:
+* Approximate statistics based on the first 28 samples:
   |         | sentence_0                                                                        | sentence_1                                                                        | label                                                         |
   |:--------|:----------------------------------------------------------------------------------|:----------------------------------------------------------------------------------|:--------------------------------------------------------------|
   | type    | string                                                                            | string                                                                            | float                                                         |
-  | details | <ul><li>min: 8 tokens</li><li>mean: 12.91 tokens</li><li>max: 23 tokens</li></ul> | <ul><li>min: 7 tokens</li><li>mean: 30.55 tokens</li><li>max: 67 tokens</li></ul> | <ul><li>min: 1.0</li><li>mean: 1.0</li><li>max: 1.0</li></ul> |
+  | details | <ul><li>min: 8 tokens</li><li>mean: 14.18 tokens</li><li>max: 23 tokens</li></ul> | <ul><li>min: 7 tokens</li><li>mean: 32.07 tokens</li><li>max: 67 tokens</li></ul> | <ul><li>min: 1.0</li><li>mean: 1.0</li><li>max: 1.0</li></ul> |
 * Samples:
-  | sentence_0                                                                               | sentence_1                                                                                                                               | label            |
-  |:-----------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------|:-----------------|
-  | <code>What programs options are available in the MS Applied Data Science program?</code> | <code>In-person program, Online progran and Joint MBA/MS program</code>                                                                  | <code>1.0</code> |
-  | <code>What is tuition cost for the program?</code>                                       | <code>Tuition for the MS in Applied Data Science program: $5,967 per course/$71,604 total tuition</code>                                 | <code>1.0</code> |
-  | <code>Can I set up an advising appointment with the enrollment management team?</code>   | <code>Yes, meet your admissions counselor by scheduling an appointment https://apply-psd.uchicago.edu/portal/applied-data-science</code> | <code>1.0</code> |
+  | sentence_0                                             | sentence_1                                                                                                                                                    | label            |
+  |:-------------------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------|
+  | <code>Is there an application fee?</code>              | <code>There is a $90 non-refundable application fee</code>                                                                                                    | <code>1.0</code> |
+  | <code>Where can I mail my official transcripts?</code> | <code>The University of Chicago<br>Attention: MS in Applied Data Science Admissions<br>455 N Cityfront Plaza Dr., Suite 950<br>Chicago, Illinois 60611</code> | <code>1.0</code> |
+  | <code>Is there an application fee waiver?</code>       | <code>For questions regarding an application fee waiver, please refer to the Physical Sciences Division fee waiver policy.</code>                             | <code>1.0</code> |
 * Loss: [<code>MultipleNegativesRankingLoss</code>](https://sbert.net/docs/package_reference/sentence_transformer/losses.html#multiplenegativesrankingloss) with these parameters:
   ```json
   {
@@ -365,21 +366,22 @@ You can finetune this model on your own dataset.
 ### Training Logs
 | Epoch  | Step | spearman_cosine |
 |:------:|:----:|:---------------:|
-| 0.8333 | 5    | nan             |
-| 1.0    | 6    | nan             |
-| 1.6667 | 10   | nan             |
-| 2.0    | 12   | nan             |
-| 2.5    | 15   | nan             |
-| 3.0    | 18   | nan             |
-| 3.3333 | 20   | nan             |
-| 4.0    | 24   | nan             |
+| 0.7143 | 5    | nan             |
+| 1.0    | 7    | nan             |
+| 1.4286 | 10   | nan             |
+| 2.0    | 14   | nan             |
+| 2.1429 | 15   | nan             |
+| 2.8571 | 20   | nan             |
+| 3.0    | 21   | nan             |
+| 3.5714 | 25   | nan             |
+| 4.0    | 28   | nan             |
 
 
 ### Environmental Impact
 Carbon emissions were measured using [CodeCarbon](https://github.com/mlco2/codecarbon).
 - **Energy Consumed**: 0.000 kWh
 - **Carbon Emitted**: 0.000 kg of CO2
-- **Hours Used**: 0.024 hours
+- **Hours Used**: 0.035 hours
 
 ### Training Hardware
 - **On Cloud**: No

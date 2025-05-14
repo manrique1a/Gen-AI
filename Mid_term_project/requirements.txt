@@ -2,6 +2,7 @@
 streamlit
 langchain
 langchain-community
+langchain-openai
 transformers
 sentence-transformers
 protobuf==3.20.3

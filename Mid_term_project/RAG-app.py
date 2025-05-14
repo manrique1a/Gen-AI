@@ -61,8 +61,3 @@ if query:
         for i, doc in enumerate(result["source_documents"]):
             st.markdown(f"**Source {i+1}**")
             st.code(doc.page_content[:500])
-
-
-
-
-
