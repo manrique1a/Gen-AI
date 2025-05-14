@@ -76,6 +76,6 @@ query = st.text_input("Ask a question about the Master's in Applied Data Science
 if query:
     with st.spinner("Thinking..."):
         result = qa_chain({"query": query})
-        st.subheader("📌 Answer")
+        st.subheader("Answer")
         st.write(result["result"])
 
