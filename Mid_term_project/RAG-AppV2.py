@@ -21,11 +21,11 @@ st.title("💬 UChicago MS in Applied Data Science Chatbot")
 from langchain_community.embeddings import HuggingFaceEmbeddings
 
 os.environ["HF_HUB_OFFLINE"] = "1"
-model_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "fine_tuned_qa_embedding_model"))
+model_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "app_model"))
 embedding_model = HuggingFaceEmbeddings(model_name=model_path)
 
 # --- Load Chroma vector store ---
-persist_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "chroma_v2"))
+persist_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "chroma_v3"))
 vectorstore = Chroma(persist_directory=persist_dir, embedding_function=embedding_model)
 
 # --- Retriever and Generator ---
