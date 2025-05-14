@@ -79,7 +79,3 @@ if query:
         st.subheader("📌 Answer")
         st.write(result["result"])
 
-        st.subheader("📚 Source Documents")
-        for i, doc in enumerate(result["source_documents"]):
-            st.markdown(f"**Source {i+1}**")
-            st.code(doc.page_content[:500])
