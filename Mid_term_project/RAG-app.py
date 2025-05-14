@@ -10,6 +10,8 @@ from sentence_transformers import SentenceTransformer
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from dotenv import load_dotenv
 import os
+from langchain.document_loaders import TextLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 # Load secrets from environment or .env
 load_dotenv()
@@ -18,6 +20,16 @@ openai_api_key = os.getenv("OPENAI_API_KEY")
 # --- Streamlit Setup ---
 st.set_page_config(page_title="UChicago ADS Chatbot", layout="wide")
 st.title("💬 The University of Chicago Master's in Applied Data Science Chatbot")
+
+# load .txt file
+try:
+    text_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "uchicago_datascience_cleaned.txt"))
+    loader = TextLoader(text_path)
+    raw_documents = loader.load()
+    splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100)
+    docs = splitter.split_documents(raw_documents)
+except Exception as e:
+    st.warning(f"Loaded app but failed to read .txt file for reference: {e}")
 
 # --- Load fine-tuned embedding model ---
 os.environ["HF_HUB_OFFLINE"] = "1"
