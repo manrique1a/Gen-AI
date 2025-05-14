@@ -23,13 +23,13 @@ st.title("💬 The University of Chicago Master's in Applied Data Science Chatbo
 os.environ["HF_HUB_OFFLINE"] = "1"
 
 # Get the absolute path to the model directory
-model_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "fine_tuned_qa_embedding_model"))
+model_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "app_model"))
 
 # Load the embedding model from local fine-tuned directory
 embedding_model = HuggingFaceEmbeddings(model_name=model_path)
 
 # --- Load persisted vectorstore ---
-persist_dir = "chroma_v2"
+persist_dir = "chroma_v3"
 try:
     vectorstore = Chroma(persist_directory=persist_dir, embedding_function=embedding_model)
 except Exception as e:
