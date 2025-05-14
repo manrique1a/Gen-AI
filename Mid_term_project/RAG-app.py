@@ -29,7 +29,7 @@ model_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "fine_tuned
 embedding_model = HuggingFaceEmbeddings(model_name=model_path)
 
 # --- Load persisted vectorstore ---
-persist_dir = "chroma_store"
+persist_dir = "chroma_v2"
 try:
     vectorstore = Chroma(persist_directory=persist_dir, embedding_function=embedding_model)
 except Exception as e:
